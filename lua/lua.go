@@ -188,6 +188,7 @@ func (L *State) callEx(nargs, nresults int, catch bool) (err error) {
 	L.Remove(erridx)
 	if r != 0 {
 		err = &LuaError{r, L.ToString(-1), L.StackTrace()}
+		L.Pop(1)
 		if !catch {
 			panic(err)
 		}
